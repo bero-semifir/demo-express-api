@@ -3,10 +3,10 @@ const mongoose = require('mongoose');
 
 // Définition des attributs d'un utilisateur
 const userSchema = {
-    name: String,
-    email: String,
+    name: { type: String, required: true },
+    email: { type: String, required: true },
     phone: String,
-    address: String
+    address: { type: String }
 }
 
 // Création du modèle (Objet qui contient les fonctions pour communiquer avec Mongo)
