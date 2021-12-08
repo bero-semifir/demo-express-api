@@ -4,6 +4,11 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const poulet = require('./middlewares/poulet.middleware');
 
+// import de dotenv (livrairie)
+const dotenv = require('dotenv');
+// configuration des variables d'environnement avec le fichier .env
+dotenv.config();
+
 // import du script de connexion à la bdd
 require('./config/db.config');
 
@@ -13,7 +18,10 @@ const userRoute = require('./routes/users.route');
 // création de l'app
 const app = express();
 
-const PORT = 3000;
+// Lecture du port depuis les variables d'environement, si elle existe elle est lue
+// depuis les variables d'environement
+// sinon elle passe à 3000
+const PORT = process.env.NODE_PORT || 3000;
 
 // Middlewares
 app.use(express.json());    // Middleware pour parser le JSON
