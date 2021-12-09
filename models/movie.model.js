@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 // Définition des attributs d'un utilisateur
-const filmSchema = {
+const movieSchema = {
     // _id: { type: mongoose.SchemaTypes.ObjectId },
     title: { type: String, required: true },
     duration: { type: String, required: true },
@@ -11,7 +11,7 @@ const filmSchema = {
 }
 
 // Création du modèle (Objet qui contient les fonctions pour communiquer avec Mongo)
-const FilmModel = mongoose.model('films', filmSchema)
+const MovieModel = mongoose.model('movies', movieSchema)
 
 // Export pour utiliser le modèle à l'exterieur
-module.exports = FilmModel;
+module.exports = MovieModel;

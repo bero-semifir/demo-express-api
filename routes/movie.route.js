@@ -1,34 +1,34 @@
 const express = require('express');
 
-const FilmModel = require('../models/film.model');
+const MovieModel = require('../models/movie.model');
 
 const Router = express.Router();
 
-Router.route('/films/search')
+Router.route('/movies/search')
     .get(async (req, res) => {
         console.log(req.query);
         let searchParams = req.query;
-        let films = await FilmModel.find({ ...searchParams });
-        res.json(films);
+        let movies = await MovieModel.find({ ...searchParams });
+        res.json(movies);
     });
 
-Router.route('/films')
+Router.route('/movies')
     .get(async (_, res) => {
 
-        let films = await FilmModel.find();
+        let movies = await MovieModel.find();
 
-        if (films.length === 0) {
+        if (movies.length === 0) {
             res.status(404);
         } else {
             res.status(200);
         }
 
-        res.json(films);
+        res.json(movies);
     })
     .post(async (req, res) => {
-        let newFilm = req.body;
+        let newMovie = req.body;
         try {
-            let resp = await FilmModel.create(newFilm);
+            let resp = await MovieModel.create(newMovie);
             res.status(201).json(resp);
         } catch (err) {
             console.error(err);
@@ -36,21 +36,21 @@ Router.route('/films')
         }
     });
 
-Router.route('/films/:id')
+Router.route('/movies/:id')
     .get(async (req, res) => {
         try {
 
-            let film = await FilmModel.findById(req.params.id);
+            let movie = await MovieModel.findById(req.params.id);
 
-            res.status(200).json(film);
+            res.status(200).json(movie);
         } catch (err) {
             sendErrMessage(res, err);
         }
     })
     .put(async (req, res) => {
-        let newFilm = req.body;
+        let newMovie = req.body;
         try {
-            let resp = await FilmModel.findByIdAndUpdate(req.params.id, newFilm);
+            let resp = await MovieModel.findByIdAndUpdate(req.params.id, newMovie);
             res.json(resp);
         } catch (err) {
             sendErrMessage(res, err);
@@ -58,17 +58,17 @@ Router.route('/films/:id')
     })
     .patch(async (req, res) => {
 
-        let film = await FilmModel.findById(req.params.id);
+        let movie = await MovieModel.findById(req.params.id);
 
-        if (film) {
+        if (movie) {
 
             Object.keys(req.body).forEach((key) => {
-                film[key] = req.body[key];
+                movie[key] = req.body[key];
             });
 
-            await FilmModel.findByIdAndUpdate(req.params.id, film);
+            await MovieModel.findByIdAndUpdate(req.params.id, movie);
             res.status(200);
-            res.json(film);
+            res.json(movie);
         } else {
             res.status(404);
             res.end();
@@ -76,7 +76,7 @@ Router.route('/films/:id')
     })
     .delete(async (req, res) => {
         try {
-            let resp = await FilmModel.findByIdAndDelete(req.params.id);
+            let resp = await MovieModel.findByIdAndDelete(req.params.id);
             res.json(resp);
         } catch (err) {
             sendErrMessage(res, err);
