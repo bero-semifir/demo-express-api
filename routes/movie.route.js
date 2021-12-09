@@ -15,7 +15,7 @@ Router.route('/movies/search')
 Router.route('/movies')
     .get(async (_, res) => {
 
-        let movies = await MovieModel.find().populate('rooms');
+        let movies = await MovieModel.find();
 
         if (movies.length === 0) {
             res.status(404);
