@@ -87,7 +87,7 @@ Router.route('/users/:id')
     .delete(async (req, res) => {
         try {
             let resp = await UserModel.findByIdAndDelete(req.params.id);
-            req.json(resp);
+            res.json(resp);
         } catch (err) {
             sendErrMessage(res, err);
         }
