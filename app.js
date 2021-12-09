@@ -16,6 +16,7 @@ require('./config/db.config');
 const userRoute = require('./routes/users.route');
 const movieRoute = require('./routes/movie.route');
 const roomRoute = require('./routes/room.route');
+const sessionRoute = require('./routes/session.route');
 
 // création de l'app
 const app = express();
@@ -35,6 +36,7 @@ app.use(poulet);            // Middleware perso
 app.use(userRoute);
 app.use(movieRoute);
 app.use(roomRoute);
+app.use(sessionRoute);
 
 // écoute sur le port donné en param
 app.listen(PORT, () => {
