@@ -10,7 +10,7 @@ const userSchema = {
 }
 
 // Création du modèle (Objet qui contient les fonctions pour communiquer avec Mongo)
-const UserModel = mongoose.model('users', userSchema)
+const UserModel = mongoose.model('User', userSchema)
 
 // Export pour utiliser le modèle à l'exterieur
 module.exports = UserModel;

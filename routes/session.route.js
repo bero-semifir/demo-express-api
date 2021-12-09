@@ -15,8 +15,8 @@ Router.route('/sessions/search')
 Router.route('/sessions')
     .get(async (_, res) => {
 
-        let sessions = await SessionModel.find();
-
+        let sessions = await SessionModel.find().populate('movie').populate('room');
+        // populate indique à Mongo d'aller chercher le domcument qui correspond à l'_id des entitée
         if (sessions.length === 0) {
             res.status(404);
         } else {
@@ -40,7 +40,7 @@ Router.route('/sessions/:id')
     .get(async (req, res) => {
         try {
 
-            let session = await SessionModel.findById(req.params.id);
+            let session = await SessionModel.findById(req.params.id).populate('room').populate('film');
 
             res.status(200).json(session);
         } catch (err) {
